@@ -236,7 +236,7 @@ author: Gyanesh5
 - [Fenng/Tech-Doc-Style-Chinese](https://github.com/Fenng/Tech-Doc-Style-Chinese)：ASD-STE100 受控写作思路（P2、P3）
 - [francoisdp/skills（anti-ai-writing）](https://github.com/francoisdp/skills)：双模式架构与 Rule 25 先用后词（P1）
 - [op7418/Humanizer-zh](https://github.com/op7418/Humanizer-zh)：保留边界三段式与信息守恒（R5）
-- [sparanoid/chinese-copywriting-guidelines](https://github.com/sparanoid/chinese-copywriting-guidelines)：混排规范（P16）
+- [sparanoid/chinese-copywriting-guidelines](https://github.com/sparanoid/chinese-copywriting-guidelines)：混排规范（P17）
 - GB/T 15834—2011《标点符号用法》、CY/T 154—2017《中文出版物夹用英文的编辑规范》：标点形式与体例统一原则（P18）
 - Gengo 中文风格指南：括号全半角按内容判定的工程规则（P18）
 - [cloudflare-docs eli5 skill](https://github.com/cloudflare/cloudflare-docs/blob/production/.agents/skills/eli5/SKILL.md)：类比与失效边界（P7）
