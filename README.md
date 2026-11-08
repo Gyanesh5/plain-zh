@@ -30,24 +30,30 @@
 ## 组成
 
 - `SKILL.md`：完整规范。五组规则 R1-R5（术语纪律、读者校准、结构信号、文体边界、改写纪律），共 22 条，每条带判据、改前改后示例、保留边界
-- `POLICY.md`：8 行常驻版，嵌入 AGENTS.md / CLAUDE.md / SOUL.md，写作时塑形
+- `POLICY.md`：8 行常驻版，贴入机器级全局指令文件（每台机器一次），写作时塑形
 - `tests/`：回归测试标本与预期命中清单
 
-## 安装
+## 安装（每台机器一次，全项目生效）
 
-Claude Code / zcode（Claude Code 目录约定）：
-
-```bash
-git clone https://github.com/Gyanesh5/plain-zh.git ~/.claude/skills/plain-zh
-# 常驻政策（可选，推荐）：
-cat ~/.claude/skills/plain-zh/POLICY.md >> ~/AGENTS.md
-```
-
-Hermes：
+技能文件（审阅模式用）：
 
 ```bash
-hermes skills install https://github.com/Gyanesh5/plain-zh
+# zcode / Claude Code 目录约定
+git clone https://github.com/Gyanesh5/plain-zh.git ~/.zcode/skills/plain-zh
+# Hermes
+hermes skills install https://raw.githubusercontent.com/Gyanesh5/plain-zh/main/SKILL.md
 ```
+
+常驻政策（生成模式用）：
+
+```bash
+# zcode：写入用户级全局 AGENTS.md，所有项目自动加载，新项目零配置
+cat ~/.zcode/skills/plain-zh/POLICY.md >> ~/.zcode/AGENTS.md
+```
+
+Hermes：把 POLICY.md 七条并进 SOUL.md（一次性）。网页类工具（ChatGPT 等）：粘进自定义指令。
+
+**政策只放全局一处**。项目 AGENTS.md 不需要也不应复制这份内容——将来规则更新，只改全局文件和技能仓库。
 
 ## 用法
 
