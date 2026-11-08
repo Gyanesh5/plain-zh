@@ -33,27 +33,28 @@
 - `POLICY.md`：8 行常驻版，贴入机器级全局指令文件（每台机器一次），写作时塑形
 - `tests/`：回归测试标本与预期命中清单
 
-## 安装（每台机器一次，全项目生效）
-
-技能文件（审阅模式用）：
+## 安装（一条命令，自动兼容主流 agent）
 
 ```bash
-# zcode / Claude Code 目录约定
-git clone https://github.com/Gyanesh5/plain-zh.git ~/.zcode/skills/plain-zh
-# Hermes
-hermes skills install https://raw.githubusercontent.com/Gyanesh5/plain-zh/main/SKILL.md
+bash <(curl -fsSL https://raw.githubusercontent.com/Gyanesh5/plain-zh/main/install.sh)
 ```
 
-常驻政策（生成模式用）：
+install.sh 做三件事：规范副本装到 `~/.local/share/plain-zh` → 技能软链进各 agent 的 skills 目录 → 政策块带标记幂等写入各 agent 的全局指令文件。**默认只配置检测到已安装的 agent**，`--all` 预写全部兼容位（之后装新 agent 即生效），重复执行自动去重更新。
 
-```bash
-# zcode：写入用户级全局 AGENTS.md，所有项目自动加载，新项目零配置
-cat ~/.zcode/skills/plain-zh/POLICY.md >> ~/.zcode/AGENTS.md
-```
+| 环境 | 覆盖方式 | 政策载体 |
+|---|---|---|
+| Claude Code | 自动（检测 `~/.claude`） | `~/.claude/CLAUDE.md` |
+| Codex CLI | 自动（检测 `~/.codex`） | `~/.codex/AGENTS.md` |
+| OpenCode | 自动（检测 `~/.config/opencode`） | `~/.config/opencode/AGENTS.md` |
+| zcode | 自动（检测 `~/.zcode`） | `~/.zcode/AGENTS.md` |
+| Gemini CLI | 自动（检测 `~/.gemini`） | `~/.gemini/GEMINI.md` |
+| Hermes | 自带通道：`hermes skills install https://raw.githubusercontent.com/Gyanesh5/plain-zh/main/SKILL.md`，POLICY 七条并进 SOUL.md（一次） | SOUL.md |
+| Cursor | 项目级：`.cursor/skills/` 里软链 canonical 目录；全局规则手动 | 设置里的全局规则 |
+| 网页类（ChatGPT 等） | 无文件系统，手动粘 POLICY.md 进自定义指令（一次） | 自定义指令 |
 
-Hermes：把 POLICY.md 七条并进 SOUL.md（一次性）。网页类工具（ChatGPT 等）：粘进自定义指令。
+规则更新只改两处：`cd ~/.local/share/plain-zh && git pull && ./install.sh --update`（各 agent 全自动刷新）+ Hermes 侧重装一次。
 
-**政策只放全局一处**。项目 AGENTS.md 不需要也不应复制这份内容——将来规则更新，只改全局文件和技能仓库。
+**政策只放全局一处**。项目 AGENTS.md 不需要也不应复制这份内容。
 
 ## 用法
 
