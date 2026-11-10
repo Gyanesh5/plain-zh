@@ -29,7 +29,8 @@
 
 ## 组成
 
-- `SKILL.md`：完整规范。五组规则 R1-R5（术语纪律、读者校准、结构信号、文体边界、改写纪律），共 22 条，每条带判据、改前改后示例、保留边界
+- `skills/plain-zh/SKILL.md`：完整规范。五组规则 R1-R5（术语纪律、读者校准、结构信号、文体边界、改写纪律），共 22 条，每条带判据、改前改后示例、保留边界
+- `.claude-plugin/`：Claude Code 插件清单（plugin.json + 自举 marketplace.json），支持 `/plugin marketplace add Gyanesh5/plain-zh`
 - `POLICY.md`：8 行常驻版，贴入机器级全局指令文件（每台机器一次），写作时塑形
 - `tests/`：回归测试标本与预期命中清单
 
@@ -39,17 +40,17 @@
 bash <(curl -fsSL https://raw.githubusercontent.com/Gyanesh5/plain-zh/main/install.sh)
 ```
 
-install.sh 做三件事：规范副本装到 `~/.local/share/plain-zh` → 技能软链进各 agent 的 skills 目录 → 政策块带标记幂等写入各 agent 的全局指令文件。**默认只配置检测到已安装的 agent**，`--all` 预写全部兼容位（之后装新 agent 即生效），重复执行自动去重更新。
+install.sh 做三件事：规范副本装到 `~/.local/share/plain-zh` → 技能软链到三个 skills 位（`~/.agents/skills` 是 vendor-neutral 标准位，Codex/Cursor/Copilot/VS Code/Gemini CLI/OpenCode/goose/Amp 八家官方路径，无条件写入；`~/.claude/skills`、`~/.zcode/skills` 按检测写入）→ 政策块带标记幂等写入各 agent 的全局指令文件。**默认只配置检测到已安装的 agent**，`--all` 预写全部兼容位（之后装新 agent 即生效），重复执行自动去重更新。
 
-| 环境 | 覆盖方式 | 政策载体 |
+| 环境 | 技能覆盖 | 政策载体 |
 |---|---|---|
-| Claude Code | 自动（检测 `~/.claude`） | `~/.claude/CLAUDE.md` |
-| Codex CLI | 自动（检测 `~/.codex`） | `~/.codex/AGENTS.md` |
-| OpenCode | 自动（检测 `~/.config/opencode`） | `~/.config/opencode/AGENTS.md` |
-| zcode | 自动（检测 `~/.zcode`） | `~/.zcode/AGENTS.md` |
-| Gemini CLI | 自动（检测 `~/.gemini`） | `~/.gemini/GEMINI.md` |
-| Hermes | 自带通道：`hermes skills install https://raw.githubusercontent.com/Gyanesh5/plain-zh/main/SKILL.md`，POLICY 七条并进 SOUL.md（一次） | SOUL.md |
-| Cursor | 项目级：`.cursor/skills/` 里软链 canonical 目录；全局规则手动 | 设置里的全局规则 |
+| Codex CLI / Cursor / Copilot / VS Code / Gemini CLI / OpenCode / goose / Amp | `~/.agents/skills`（无条件） | 各家全局指令文件见下 |
+| Claude Code | `~/.claude/skills`（检测 `~/.claude`），或插件通道 `/plugin marketplace add Gyanesh5/plain-zh` 后 `/plugin install plain-zh` | `~/.claude/CLAUDE.md` |
+| zcode | `~/.zcode/skills`（检测 `~/.zcode`） | `~/.zcode/AGENTS.md` |
+| Codex CLI | — | `~/.codex/AGENTS.md` |
+| OpenCode | — | `~/.config/opencode/AGENTS.md` |
+| Gemini CLI | — | `~/.gemini/GEMINI.md` |
+| Hermes | 自带通道：`hermes skills install https://raw.githubusercontent.com/Gyanesh5/plain-zh/main/skills/plain-zh/SKILL.md`，POLICY 并进 SOUL.md（一次） | SOUL.md |
 | 网页类（ChatGPT 等） | 无文件系统，手动粘 POLICY.md 进自定义指令（一次） | 自定义指令 |
 
 规则更新只改两处：`cd ~/.local/share/plain-zh && git pull && ./install.sh --update`（各 agent 全自动刷新）+ Hermes 侧重装一次。

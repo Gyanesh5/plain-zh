@@ -1,0 +1,19 @@
+{
+  "name": "plain-zh",
+  "version": "1.0.0",
+  "owner": {
+    "name": "Gyanesh5",
+    "url": "https://github.com/Gyanesh5"
+  },
+  "description": "Gyanesh5 的 agent 插件：plain-zh 平实中文输出规范",
+  "plugins": [
+    {
+      "name": "plain-zh",
+      "description": "平实中文输出规范：术语纪律、读者校准、结构信号、文体边界四层规则，生成与审阅双模式，规则按证据强度分级标注",
+      "source": "./",
+      "version": "0.5.0",
+      "category": "writing",
+      "tags": ["chinese", "writing-style", "plain-language", "technical-writing", "review"]
+    }
+  ]
+}

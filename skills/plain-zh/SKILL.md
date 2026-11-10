@@ -1,7 +1,7 @@
 ---
 name: plain-zh
 description: 平实中文输出规范。两种用法：写作时塑形（事前预防）、成稿后审阅改写（事后清理）。覆盖术语纪律、读者校准、结构信号、文体边界四层，规则按证据强度分级标注。适用于中文技术写作、教学讲解、AI 助手回复的生成与审阅。
-version: 0.4.0
+version: 0.5.0
 license: MIT
 author: Gyanesh5
 ---
