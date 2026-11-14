@@ -1,5 +1,8 @@
 # plain-zh 平实中文
 
+
+
+> **已迁移**：本仓库已收编进 [Gyanesh5/agent-conventions](https://github.com/Gyanesh5/agent-conventions)（唯一真源，三合一规范插件：plain-zh + coding-conventions + industrial-impeccable）。本仓库已归档、只读保历史。已安装用户请按新仓库 README 一条命令迁移。
 中文输出的平实性规范，做成 agent skill（纯 Markdown，零依赖，Claude Code / Codex / zcode / Hermes 通用）。
 
 解决的问题是：AI 生成的中文经常出现读者「读不懂、觉得突兀」的表达。真实标本（取自一次实际 AI 输出）：
